@@ -10,7 +10,7 @@ namespace Handelsrechner.model
     internal class Angebot
     {
         public string? Angebotsname { get; set;}
-        public decimal Nettoeinkaufspreis { get; set; }
+        public decimal Listeneinkaufspreis { get; set; }
         public decimal LieferrabattProzent { get; set; }
         public decimal LieferrabattEUR { get; set; }
         public decimal Zieleinkaufspreis { get; set; }
@@ -23,7 +23,7 @@ namespace Handelsrechner.model
         public Dictionary<string, string> Eingabebogen { get; set; } = new Dictionary<string, string>()
         {
             {"Angebotsname", "Angebotsname"},
-            {"Nettoeinkaufspreis", "Nettoeinkaufspreis"},
+            {"Listeneinkaufspreis", "Listeneinkaufspreis"},
             {"LieferrabattProzent", "Lieferrabatt in Prozent"},
             {"LieferskontoProzent", "Lieferskonto in Prozent" },
             {"Bezugskosten", "Bezugskosten"}
@@ -32,30 +32,35 @@ namespace Handelsrechner.model
         public Dictionary<string, string> Ausgabebogen { get; set; } = new Dictionary<string, string>()
         {
             {"Angebotsname", "Angebotsname"},
-            {"Nettoeinkaufspreis", "Nettoeinkaufspreis"},
+            {"Listeneinkaufspreis", "Listeneinkaufspreis"},
             {"LieferrabattProzent", "Lieferrabatt in Prozent"},
             {"LieferrabattEUR", "Lieferrabatt in Euro"},
-            {"Zieleinkaufspreis", "Zieleinkaufspreis"}
+            {"Zieleinkaufspreis", "Zieleinkaufspreis"},
+            {"LieferskontoProzent", "Lieferskonto in Prozent"},
+            {"LieferskontoEUR", "Lieferskonto in Euro"},
+            {"Bareinkaufspreis", "Bareinkaufspreis"},
+            {"Bezugskosten", "Bezugskosten"},
+            {"Bezugspreis", "Bezugspreis"}
         };
 
-        public void berechneAngebot()
+        public void BerechneAngebot()
         {
-            berechneZieleinkaufspreis();
-            berechneBareinkaufspreis();
-            berechneBezugspreis();
+            BerechneZieleinkaufspreis();
+            BerechneBareinkaufspreis();
+            BerechneBezugspreis();
         }
 
-        protected void berechneZieleinkaufspreis()
+        protected void BerechneZieleinkaufspreis()
         {
-            Zieleinkaufspreis = Nettoeinkaufspreis * (100 - LieferrabattProzent) / 100;
-            LieferrabattEUR = Nettoeinkaufspreis - Zieleinkaufspreis;
+            Zieleinkaufspreis = Listeneinkaufspreis * (100 - LieferrabattProzent) / 100;
+            LieferrabattEUR = Listeneinkaufspreis - Zieleinkaufspreis;
         }
-        protected void berechneBareinkaufspreis()
+        protected void BerechneBareinkaufspreis()
         {
             Bareinkaufspreis = Zieleinkaufspreis * (100 - LieferskontoProzent) / 100;
-            LieferskontoEUR = Bareinkaufspreis - Zieleinkaufspreis;
+            LieferskontoEUR = Zieleinkaufspreis - Bareinkaufspreis;
         }
-        protected void berechneBezugspreis()
+        protected void BerechneBezugspreis()
         {
             Bezugspreis = Bareinkaufspreis + Bezugskosten;
         }
