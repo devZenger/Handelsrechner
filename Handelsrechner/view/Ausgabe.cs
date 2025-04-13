@@ -1,22 +1,19 @@
-﻿using Handelsrechner.model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-
-namespace Handelsrechner.view
+﻿namespace Handelsrechner.view
 
 {
     internal class Ausgabe
     {
-        private string Linie = "--------------------------------------------------";
+        private string Linie = "\t--------------------------------------------------";
 
         public void titel(string titel)
         {
             Console.WriteLine(Linie);
             Console.WriteLine($"\t{titel}");
+            Console.WriteLine(Linie);
+        }
+        public void info(string text)
+        {
+            Console.WriteLine($"\t{text}");
             Console.WriteLine(Linie);
         }
 
@@ -53,9 +50,5 @@ namespace Handelsrechner.view
             }
             Console.WriteLine(Linie);
         }
-
-
-
-
     }
 }

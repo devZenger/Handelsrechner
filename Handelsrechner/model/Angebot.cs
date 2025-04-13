@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Handelsrechner.model
+﻿namespace Handelsrechner.model
 {
-    internal class Angebot
+    public class Angebot
     {
-        public string? Angebotsname { get; set;}
+        public string? Angebotsname { get; set; }
         public decimal Listeneinkaufspreis { get; set; }
         public decimal LieferrabattProzent { get; set; }
         public decimal LieferrabattEUR { get; set; }
@@ -45,26 +38,48 @@ namespace Handelsrechner.model
 
         public void BerechneAngebot()
         {
+            BerechneLieferrabattEUR();
             BerechneZieleinkaufspreis();
+            BerechneLieferskontoEUR();
             BerechneBareinkaufspreis();
             BerechneBezugspreis();
         }
 
+        protected void BerechneLieferrabattEUR()
+        {
+            if (LieferrabattProzent > 0)
+            {
+                LieferrabattEUR = Listeneinkaufspreis * LieferrabattProzent / 100;
+                LieferrabattEUR = Math.Round(LieferrabattEUR, 2, MidpointRounding.AwayFromZero);
+            }
+            else
+            {
+                LieferrabattEUR = 0;
+            }
+        }
         protected void BerechneZieleinkaufspreis()
         {
-            Zieleinkaufspreis = Listeneinkaufspreis * (100 - LieferrabattProzent) / 100;
-            LieferrabattEUR = Listeneinkaufspreis - Zieleinkaufspreis;
+            Zieleinkaufspreis = Listeneinkaufspreis - LieferrabattEUR;
+        }
+        protected void BerechneLieferskontoEUR()
+        {
+            if (LieferrabattProzent > 0)
+            {
+                LieferskontoEUR = Zieleinkaufspreis * LieferskontoProzent / 100;
+                LieferskontoEUR = Math.Round(LieferskontoEUR, 2, MidpointRounding.AwayFromZero);
+            }
+            else
+            {
+                LieferskontoEUR = 0;
+            }
         }
         protected void BerechneBareinkaufspreis()
         {
-            Bareinkaufspreis = Zieleinkaufspreis * (100 - LieferskontoProzent) / 100;
-            LieferskontoEUR = Zieleinkaufspreis - Bareinkaufspreis;
+            Bareinkaufspreis = Zieleinkaufspreis - LieferskontoEUR;
         }
         protected void BerechneBezugspreis()
         {
             Bezugspreis = Bareinkaufspreis + Bezugskosten;
         }
-
-
     }
 }

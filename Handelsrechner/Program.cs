@@ -10,6 +10,8 @@ namespace Handelsrechner
 
             MainControl mainControl = new MainControl();
             mainControl.ausfuehren();
+
+            Environment.Exit(0);
         }
     }
 }

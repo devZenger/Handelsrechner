@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Handelsrechner.service
+﻿namespace Handelsrechner.service
 {
     internal class Eigenschaften
     {
@@ -24,14 +18,14 @@ namespace Handelsrechner.service
                 }
                 return true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return false;
             }
         }
 
-        public object lese (object objekt, string eigenschaft)
+        public object lese(object objekt, string eigenschaft)
         {
             var property = objekt.GetType().GetProperty(eigenschaft);
             if (property != null)

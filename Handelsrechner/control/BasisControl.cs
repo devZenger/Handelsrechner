@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Handelsrechner.control
-{    
+﻿namespace Handelsrechner.control
+{
     abstract class BasisControl
     {
+        protected abstract string Titel { get; }
+
+        protected abstract List<string> MenuListe { get; }
+
         protected string Fehlermeldung = "Eingabe war nicht korrekt, bitte erneut versuchen.";
-        public abstract void ausfuehren();
+
+        protected string AuswahlFehlermeldung = $"Fehler: auswahl konnte nicht zugeordnet werden.";
+        public abstract void ausfuehren(string auswahl);
     }
 }

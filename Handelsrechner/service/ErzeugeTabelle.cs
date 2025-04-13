@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using Handelsrechner.model;
+﻿using Handelsrechner.model;
 
 namespace Handelsrechner.service
 {
     internal class ErzeugeTabelle
     {
-        private string decimalToString(decimal wert)
+        public string decimalToString(decimal wert)
         {
-            decimal wert2stellen = Math.Round(wert, 2, MidpointRounding.AwayFromZero);
+            decimal wert2stellen = Math.Round(wert, 2, MidpointRounding.ToEven);
             string wertString = wert2stellen.ToString("0.00");
             return wertString;
         }
@@ -22,7 +16,7 @@ namespace Handelsrechner.service
             Dictionary<string, string> ausgabebogen = list[0].Ausgabebogen;
 
             int maxLengthNamen = 0;
-            foreach (string values in ausgabebogen.Values) 
+            foreach (string values in ausgabebogen.Values)
             {
                 int length = values.Length;
                 if (length > maxLengthNamen)
@@ -42,8 +36,8 @@ namespace Handelsrechner.service
                 if (length > maxLengthAngebote)
                     maxLengthAngebote = length;
 
-                decimal wert = list[i].Nettoeinkaufspreis;
-                decimal wert2stellen = Math.Round(wert, 2, MidpointRounding.AwayFromZero);
+                decimal wert = list[i].Listeneinkaufspreis;
+                decimal wert2stellen = Math.Round(wert, 2, MidpointRounding.ToEven);
                 string wertString = wert2stellen.ToString("0.00");
                 length = wertString.Length + 4;
 
@@ -69,7 +63,7 @@ namespace Handelsrechner.service
                     {
                         var wert = setzeEigenschaften.lese(list[i], ausgabe);
                         decimal wertDecimal = Convert.ToDecimal(wert);
-                        decimal wert2stellen = Math.Round(wertDecimal, 2, MidpointRounding.AwayFromZero);
+                        decimal wert2stellen = Math.Round(wertDecimal, 2, MidpointRounding.ToEven);
                         string wertString = wert2stellen.ToString("0.00");
 
                         if (ausgabe.IndexOf("Prozent") >= 0)
@@ -88,92 +82,37 @@ namespace Handelsrechner.service
             return tabelle;
         }
 
-        public List<string> erstelleKalkulation(Zuschlangskalkulation kalkulation)
+        public List<string> erstelleKalkulation(Dictionary<string, List<string>> ausgabebogen)
         {
             List<string> tabelle = new List<string>();
-            var ausgabebogen = kalkulation.Ausgabebogen;
 
-            int length = 0;
+            int maxLengthProzent = 0;
+            int maxLengthEuro = 0;
             int maxLengthNamen = 0;
-            foreach (string values in ausgabebogen.Values)
+            foreach (var ausgabe in ausgabebogen)
             {
-                length = values.Length;
+                int length = ausgabe.Key.Length;
                 if (length > maxLengthNamen)
                     maxLengthNamen = length;
+
+                length = ausgabe.Value[0].Length;
+                if (length > maxLengthProzent)
+                    maxLengthProzent = length + 2;
+
+                length = ausgabe.Value[1].Length;
+                if (length > maxLengthEuro)
+                    maxLengthEuro = length + 4;
             }
 
-            int maxLength = 10;
-            decimal wert = kalkulation.Nettoeinkaufspreis;
-            string wertString = decimalToString(wert);
-            length = wertString.Length + 4;
-
-            if (length > maxLength)
-                maxLength = length;
-
-            string leerzeichen = new string(' ', maxLengthNamen);
-            
-
-            tabelle.Add($"{leerzeichen} | ");
-
-            string eingabe = "Eingabe";
-            string ausgabe = "Ausgabe";
-            length = eingabe.Length;
-            int left = (maxLength - length) / 2 + length;
-
-            eingabe = eingabe.PadLeft(left);
-            ausgabe = ausgabe.PadLeft(left);
-            eingabe = eingabe.PadRight(maxLength);
-            ausgabe = ausgabe.PadRight(maxLength);
-
-            tabelle[0] = $"{tabelle[0]} {eingabe}| {ausgabe}|";
-
-
-            Eigenschaften eigenschaften = new Eigenschaften();
-            string leerstellen = new string(' ', maxLength);
-            bool prozent = false;
-            int j = 1;
-            foreach (var bogen in ausgabebogen)
+            foreach (var ausgabe in ausgabebogen)
             {
-                
-                Console.WriteLine($"j nach j++  {j}");
-                var key = bogen.Key;
-                var value = bogen.Value;
+                string name = ausgabe.Key.PadRight(maxLengthNamen);
+                string wertProzent = ausgabe.Value[0].PadLeft(maxLengthProzent);
+                string wertEuro = ausgabe.Value[1].PadLeft(maxLengthEuro);
 
-                wert = Convert.ToDecimal(eigenschaften.lese(kalkulation, key));
-                wertString = decimalToString(wert);
-
-                if (key.IndexOf("Prozent") > 0)
-                {
-                    wertString = $"{wertString} %";
-                    tabelle.Add($"{value.PadRight(maxLengthNamen)} | {wertString.PadLeft(maxLength)} |");
-                    prozent = true;
-                    
-                    continue;
-                }
-
-                if (prozent == false)
-                {
-                    wertString = $"{wertString} EUR";
-                    tabelle.Add($"{value.PadRight(maxLengthNamen)} | {leerstellen} | {wertString.PadLeft(maxLength)} |");
-                }
-                else
-                {
-                    
-                    wertString = $"{wertString} EUR";
-                    tabelle[j] = $"{tabelle[j]} {wertString.PadLeft(maxLength)} |";
-                    prozent= false;
-                }
-                j++;
-                //Console.WriteLine(tabelle[j-1]);
-               
-
-
-
+                tabelle.Add($"{name} | {wertProzent} | {wertEuro} |");
             }
-
             return tabelle;
-
-
         }
     }
 }

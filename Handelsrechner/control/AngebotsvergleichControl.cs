@@ -1,30 +1,21 @@
-﻿using System.Reflection;
-
-using Handelsrechner.model;
-using Handelsrechner.view;
+﻿using Handelsrechner.model;
 using Handelsrechner.service;
-using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
+using Handelsrechner.view;
 
 namespace Handelsrechner.control
 {
-    internal class AngebotvergleichControl : BasisControl
+    internal class AngebotsvergleichControl : BasisControl
     {
-        private string titel = "Angebotvergleich";
-        public override void ausfuehren()
+        protected override string Titel { get; } = "Angebotvergleich";
+        protected override List<string> MenuListe { get; } = new List<string> { "Angebot hinzufügen", "Angebote berechnen", "Beenden" };
+        public override void ausfuehren(string auswahl = "1")
         {
             List<Angebot> angebotsliste = new List<Angebot>();
-
             Eigenschaften eigenschaften = new Eigenschaften();
-
-            var menuListe = new List<string>{ "Angebot hinzufügen", "Angebote berechnen", "Beenden" };
-
-            string auswahl = "1";
-            // string fehlermeldung = "Eingabe war nicht korrekt, bitte erneut versuchen.";
 
             Ausgabe ausgabe = new Ausgabe();
 
-            ausgabe.titel(titel);
+            ausgabe.titel(Titel);
 
             while (true)
             {
@@ -42,7 +33,7 @@ namespace Handelsrechner.control
                                 string? eingabeString = ausgabe.frage(eingabe.Value);
 
                                 richtig = eigenschaften.VersuchSetzen(angebotsliste[i], eingabe.Key, eingabeString);
-                                if ( richtig == false)
+                                if (richtig == false)
                                 {
                                     ausgabe.fehlermeldung(Fehlermeldung);
                                 }
@@ -52,7 +43,7 @@ namespace Handelsrechner.control
                         break;
 
                     case "Optionen":
-                        auswahl = ausgabe.MenuAuswahl(menuListe);
+                        auswahl = ausgabe.MenuAuswahl(MenuListe);
                         break;
 
                     case "2": //Angebote berechnen
@@ -72,9 +63,9 @@ namespace Handelsrechner.control
                             {
                                 if (preis > angebotsliste[j].Bezugspreis)
                                     preis = angebotsliste[j].Bezugspreis;
-                                    angebot = j;
+                                angebot = j;
                             }
-                            ausgabe.info($"Der günstigste Preis ist {preis} von {angebotsliste[angebot].Angebotsname}");
+                            ausgabe.info($"Der günstigste Preis ist {preis} vom Angebot: {angebotsliste[angebot].Angebotsname}");
                         }
 
 
@@ -84,7 +75,7 @@ namespace Handelsrechner.control
                     case "3":
                         Console.WriteLine("beenden");
                         break;
-                        
+
                     default:
                         ausgabe.fehlermeldung(Fehlermeldung);
                         auswahl = "Optionen";
