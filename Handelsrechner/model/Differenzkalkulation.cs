@@ -1,4 +1,6 @@
-﻿namespace Handelsrechner.model
+﻿using System;
+
+namespace Handelsrechner.model
 {
     public class Differenzkalkulation : Handelskalkulation
     {
@@ -23,10 +25,10 @@
 
             BerechneZielverkaufspreis();
             BerechneKundenrabattEUR();
-
-            BerechneBarverkaufspreis();
+            
             BerechneKundenskontoEUR();
             BerechneVertreterprovisionEUR();
+            BerechneBarverkaufspreis();
 
             BerechneGewinn();
         }
@@ -34,6 +36,7 @@
         protected void BerechneGewinn()
         {
             GewinnzuschlagEUR = Barverkaufspreis - Selbstkosten;
+            GewinnzuschlagEUR = Math.Round(GewinnzuschlagEUR, 2, MidpointRounding.ToEven);
 
             GewinnzuschlagProzent = ((Barverkaufspreis / Selbstkosten) - 1) * 100;
         }

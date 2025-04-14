@@ -14,26 +14,48 @@
 
         public override void BerechneKalkulation()
         {
+            BerechneListenverkaufspreis();
+            BerechneUmsatzsteuerEUR();
+
+            BerechneZielverkaufspreis();
+            BerechneKundenrabattEUR();
+
+            BerechneKundenskontoEUR();
+            BerechneVertreterprovisionEUR();
+
+            BerechneBarverkaufspreis();
+
+            BerechneSelbstkosten();
+            BerechneGewinnzuschlagEUR();
+
+            BerechneBezugspreis();
+            BerechneHandlungskostenEUR();
+
+            BerechneBareinkaufspreis();
+
+            BerechneZieleinkaufspreis();
+            BerechneLieferskontoEUR();
+
+            BerechneListeneinkaufspreis();
+            BerechneLieferrabattEUR();
 
         }
-
-        protected void BerechneListenverkaufspreis()
+        protected override void BerechneBezugspreis()
         {
-            Listenverkaufspreis = ListenverkaufspreisBrutto / (100 + UmsatzsteuerProzent) * 100;
-            UmsatzsteuerEUR = ListenverkaufspreisBrutto - Listenverkaufspreis;
+            Bezugspreis = Selbstkosten / (100 + HandlungskostenProzent) * 100;
+        }
+        protected override void BerechneBareinkaufspreis()
+        {
+            Bareinkaufspreis = Bezugspreis - Bezugskosten;
+        }
+        protected override void BerechneZieleinkaufspreis()
+        {
+            Zieleinkaufspreis = Bareinkaufspreis / (100 - LieferskontoProzent) * 100;
+        }
+        protected void BerechneListeneinkaufspreis()
+        {
+            Listeneinkaufspreis = Zieleinkaufspreis / (100 - LieferrabattProzent) * 100;
         }
 
-        protected void BerechneZielverkaufspreis()
-        {
-            Zielverkaufspreis = Listenverkaufspreis / (100 + KundenrabattProzent) * 100;
-            KundenrabattEUR = Listenverkaufspreis - Zielverkaufspreis;
-        }
-
-        protected void BerechneBarverkaufspreis()
-        {
-            Barverkaufspreis = Zielverkaufspreis / (100 + KundenskontoProzent + VertreterprovisionProzent) * 100;
-            KundenskontoEUR = Barverkaufspreis - Zielverkaufspreis;
-            VertreterprovisionEUR = Barverkaufspreis * VertreterprovisionProzent / 100;
-        }
     }
 }

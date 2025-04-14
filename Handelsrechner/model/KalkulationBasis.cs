@@ -52,7 +52,10 @@ namespace Handelsrechner.model
         }
         protected void BerechneSelbstkosten()
         {
-            Selbstkosten = Bezugspreis + HandlungskostenEUR;
+            if (Bezugspreis > 0)
+                Selbstkosten = Bezugspreis + HandlungskostenEUR;
+            else
+                Selbstkosten = Barverkaufspreis / (100 + GewinnzuschlagProzent) * 100;
         }
 
         protected void BerechneGewinnzuschlagEUR()
@@ -61,6 +64,7 @@ namespace Handelsrechner.model
             {
                 GewinnzuschlagEUR = Selbstkosten * GewinnzuschlagProzent / 100;
                 GewinnzuschlagEUR = Math.Round(GewinnzuschlagEUR, 2, MidpointRounding.ToEven);
+               
             }
             else
             {
@@ -69,10 +73,12 @@ namespace Handelsrechner.model
         }
         protected void BerechneBarverkaufspreis()
         {
-            if (Selbstkosten > 0)
+            if (Selbstkosten > 0 && GewinnzuschlagProzent > 0)
                 Barverkaufspreis = Selbstkosten + GewinnzuschlagEUR;
             else
-                Barverkaufspreis = Zielverkaufspreis / (100 - KundenskontoEUR - VertreterprovisionProzent) * 100;
+                Barverkaufspreis = Zielverkaufspreis - KundenskontoEUR - VertreterprovisionEUR;
+
+            Console.WriteLine($"Barverkaufspreis: {Barverkaufspreis.ToString()}");
         }
         protected void BerechneKundenskontoEUR()
         {
@@ -100,17 +106,20 @@ namespace Handelsrechner.model
         }
         protected void BerechneZielverkaufspreis()
         {
-            if (Bareinkaufspreis > 0)
+            Console.WriteLine($"Barverkaufspreis {Barverkaufspreis.ToString()}");
+
+            if (Barverkaufspreis > 0)
                 Zielverkaufspreis = Barverkaufspreis / (100 - KundenskontoProzent - VertreterprovisionProzent) * 100;
             else
-                Zielverkaufspreis = Listenverkaufspreis / (100 + KundenrabattProzent) * 100;
+                Zielverkaufspreis = Listenverkaufspreis / 100 * (100 - KundenrabattProzent);
+
+            Console.WriteLine($"Zielverkaufspreis {Zielverkaufspreis.ToString()}");
         }
         protected void BerechneKundenrabattEUR()
         {
             if (KundenrabattProzent > 0)
             {
                 KundenrabattEUR = Listenverkaufspreis * KundenrabattProzent / 100;
-                Console.WriteLine(KundenrabattEUR.ToString());
                 KundenrabattEUR = Math.Round(KundenrabattEUR, 2, MidpointRounding.ToEven);
             }
             else
@@ -123,7 +132,9 @@ namespace Handelsrechner.model
             if (Zielverkaufspreis > 0)
                 Listenverkaufspreis = Zielverkaufspreis / (100 - KundenrabattProzent) * 100;
             else
-                Listenverkaufspreis = ListenverkaufspreisBrutto / (100 + UmsatzsteuerProzent) / 100;
+                Listenverkaufspreis = ListenverkaufspreisBrutto / (100 + UmsatzsteuerProzent) * 100;
+
+            Console.WriteLine($"Listenverkaufspreis {Listenverkaufspreis.ToString()}");
         }
         protected void BerechneUmsatzsteuerEUR()
         {

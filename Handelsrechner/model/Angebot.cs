@@ -57,7 +57,7 @@
                 LieferrabattEUR = 0;
             }
         }
-        protected void BerechneZieleinkaufspreis()
+        protected virtual void BerechneZieleinkaufspreis()
         {
             Zieleinkaufspreis = Listeneinkaufspreis - LieferrabattEUR;
         }
@@ -73,11 +73,11 @@
                 LieferskontoEUR = 0;
             }
         }
-        protected void BerechneBareinkaufspreis()
+        protected virtual void BerechneBareinkaufspreis()
         {
             Bareinkaufspreis = Zieleinkaufspreis - LieferskontoEUR;
         }
-        protected void BerechneBezugspreis()
+        protected virtual void BerechneBezugspreis()
         {
             Bezugspreis = Bareinkaufspreis + Bezugskosten;
         }
