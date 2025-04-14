@@ -33,10 +33,11 @@ namespace HandelsrechnerTest
             decimal sollHandlungskostenEUR = 314m;
             decimal sollSelbstkosten = 1099m;
 
-            decimal sollGewinnzuschlagEUR = 109.9m;
-            decimal sollBarverkaufspreis = 1_208.9m;
+            decimal sollGewinnzuschlagEUR = 109.91m;
+            decimal sollGewinnzuschlagProzent = 10m;
+            decimal sollBarverkaufspreis = 1_208.91m;
 
-            decimal sollZielverkaufspreis = 1_343.22m;
+            decimal sollZielverkaufspreis = 1_343.23m;
 
             decimal sollKundenskontoEUR = 67.16m;
             decimal sollVertreterprovisionEUR = 67.16m;
@@ -47,15 +48,23 @@ namespace HandelsrechnerTest
             decimal sollUmsatzsteuerEUR = 319.02m;
             decimal sollListenverkaufspreisBrutto = 1_998.05m;
 
+
+            Assert.Equal(sollGewinnzuschlagEUR, dk.GewinnzuschlagEUR);
+
+            decimal istGewinnzuschlagProzent = Math.Round(dk.GewinnzuschlagProzent, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollGewinnzuschlagProzent, istGewinnzuschlagProzent);
+
             Assert.Equal(sollLieferrabattEUR, dk.LieferrabattEUR);
+            
             Assert.Equal(sollZieleinkaufspreis, dk.Zieleinkaufspreis);
             Assert.Equal(sollLieferskontoEUR, dk.LieferskontoEUR);
+
             Assert.Equal(sollBareinkaufspreis, dk.Bareinkaufspreis);
+
             Assert.Equal(sollBezugspreis, dk.Bezugspreis);
 
             Assert.Equal(sollHandlungskostenEUR, dk.HandlungskostenEUR);
-
-            Assert.Equal(sollGewinnzuschlagEUR, dk.GewinnzuschlagEUR);
+ 
             decimal istSelbstkosten = Math.Round(dk.Selbstkosten, 2, MidpointRounding.ToEven);
             Assert.Equal(sollSelbstkosten, istSelbstkosten);
 

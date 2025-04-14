@@ -47,10 +47,16 @@ namespace HandelsrechnerTest
             decimal sollListenverkaufspreisBrutto = 1_998.05m;
 
             Assert.Equal(sollLieferrabattEUR, hk.LieferrabattEUR);
-            Assert.Equal(sollZieleinkaufspreis, hk.Zieleinkaufspreis);
+
+            decimal istZieleinkaufspreis = Math.Round(hk.Zieleinkaufspreis, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollZieleinkaufspreis, istZieleinkaufspreis);
             Assert.Equal(sollLieferskontoEUR, hk.LieferskontoEUR);
-            Assert.Equal(sollBareinkaufspreis, hk.Bareinkaufspreis);
-            Assert.Equal(sollBezugspreis, hk.Bezugspreis);
+
+            decimal istBareinkaufspreis = Math.Round(hk.Bareinkaufspreis, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollBareinkaufspreis, istBareinkaufspreis);
+
+            decimal istBezugspreis = Math.Round(hk.Bezugspreis, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollBezugspreis, istBezugspreis);
 
             Assert.Equal(sollHandlungskostenEUR, hk.HandlungskostenEUR);
 

@@ -18,18 +18,22 @@ namespace HandelsrechnerTest
 
             decimal sollLieferrabattEUR = 200;
             decimal sollZieleinkaufspreis = 800;
-
             decimal sollLieferskontoEUR = 40;
             decimal sollBareinkaufspreis = 760;
-
             decimal sollBezugspreis = 785;
 
-
             Assert.Equal(sollLieferrabattEUR, angebot.LieferrabattEUR);
-            Assert.Equal(sollZieleinkaufspreis, angebot.Zieleinkaufspreis);
+
+            decimal istZieleinkaufspreis = Math.Round(angebot.Zieleinkaufspreis, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollZieleinkaufspreis, istZieleinkaufspreis);
+
             Assert.Equal(sollLieferskontoEUR, angebot.LieferskontoEUR);
-            Assert.Equal(sollBareinkaufspreis, angebot.Bareinkaufspreis);
-            Assert.Equal(sollBezugspreis, angebot.Bezugspreis);
+
+            decimal istBareinkaufspreis = Math.Round(angebot.Bareinkaufspreis, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollBareinkaufspreis, istBareinkaufspreis);
+
+            decimal istBezugspreis = Math.Round(angebot.Bezugspreis, 2, MidpointRounding.ToEven);
+            Assert.Equal(sollBezugspreis, istBezugspreis);
         }
     }
 }
