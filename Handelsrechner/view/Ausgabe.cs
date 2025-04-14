@@ -3,7 +3,7 @@
 {
     internal class Ausgabe
     {
-        private string Linie = "\t--------------------------------------------------";
+        private string Linie = "\t---------------------------------------------------------";
 
         public void titel(string titel)
         {
