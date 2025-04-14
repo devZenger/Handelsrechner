@@ -1,9 +1,10 @@
-﻿namespace Handelsrechner.control
+﻿using System.Diagnostics.Tracing;
+
+namespace Handelsrechner.control
 {
     abstract class BasisControl
     {
-        protected abstract string Titel { get; }
-
+        protected abstract string Titel { get; set; }
         protected abstract List<string> MenuListe { get; }
 
         protected string Fehlermeldung = "Eingabe war nicht korrekt, bitte erneut versuchen.";

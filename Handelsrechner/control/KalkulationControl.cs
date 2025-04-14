@@ -6,17 +6,42 @@ namespace Handelsrechner.control
 {
     internal class KalkulationControl : BasisControl
     {
-        protected override string Titel { get; } = "Handelskalkulation";
-        protected override List<string> MenuListe { get; } = new List<string> { "Handelskalkulation", "Beenden" };
-
+        protected override string Titel { get; set; }
+        protected override List<string> MenuListe { get; } = new List<string> { "weitere Kalkulation durchführen", "zurück zum Hauptmenü" };
         public override void ausfuehren(string auswahl)
+        {
+            Ausgabe ausgabe = new Ausgabe();
+            string auswahlMenu = "1";
+
+            while (true)
+            {
+                switch (auswahlMenu)
+                {
+                    case "1":
+                        kalkulation(auswahl);
+                        auswahlMenu = "Optionen";
+                        break;
+
+                    case "Optionen":
+                        auswahlMenu = ausgabe.MenuAuswahl(MenuListe);
+                        break;
+
+                    case "2":
+                        return;
+
+                    default:
+                        ausgabe.fehlermeldung(AuswahlFehlermeldung);
+                        break;
+                }
+            }
+        }
+        public void kalkulation(string auswahl)
         {
             Eigenschaften eigenschaften = new Eigenschaften();
             ErzeugeTabelle erzeugeTabelle = new ErzeugeTabelle();
 
-
             Ausgabe ausgabe = new Ausgabe();
-
+            Titel = auswahl;
             ausgabe.titel(Titel);
 
             KalkulationBasis? kalkulation = null;
@@ -29,6 +54,10 @@ namespace Handelsrechner.control
 
                 case "Differenzkalkulation":
                     kalkulation = new Differenzkalkulation();
+                    break;
+
+                case "Rückwärtskalkulation":
+                    kalkulation = new Rueckwaertskalkulation();
                     break;
 
                 default:
@@ -61,10 +90,9 @@ namespace Handelsrechner.control
                 ausgabe.zeigeTabelle(tabelle);
             }
             else
-                ausgabe.fehlermeldung("Kalkulation konnte nicht berechne werden");
-
-
+                ausgabe.fehlermeldung("Kalkulation konnte nicht berechnet werden");
         }
 
     }
 }
+

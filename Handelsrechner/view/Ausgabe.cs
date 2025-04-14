@@ -38,6 +38,7 @@
                 Console.WriteLine($"\t{i + 1}. {auswahl[i]}");
             }
             Console.WriteLine(Linie);
+            Console.Write("\tBitte Zahl eingeben: ");
             string? eingabe = Console.ReadLine();
             return eingabe;
         }

@@ -6,7 +6,7 @@ namespace Handelsrechner.control
 {
     internal class AngebotsvergleichControl : BasisControl
     {
-        protected override string Titel { get; } = "Angebotvergleich";
+        protected override string Titel { get; set; } = "Angebotvergleich";
         protected override List<string> MenuListe { get; } = new List<string> { "Angebot hinzufügen", "Angebote berechnen", "Beenden" };
         public override void ausfuehren(string auswahl = "1")
         {
@@ -67,8 +67,6 @@ namespace Handelsrechner.control
                             }
                             ausgabe.info($"Der günstigste Preis ist {preis} vom Angebot: {angebotsliste[angebot].Angebotsname}");
                         }
-
-
                         auswahl = "Optionen";
                         break;
 
