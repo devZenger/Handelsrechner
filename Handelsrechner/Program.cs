@@ -6,8 +6,6 @@ namespace Handelsrechner
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
             MainControl mainControl = new MainControl();
             mainControl.ausfuehren();
 
