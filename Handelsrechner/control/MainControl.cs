@@ -1,6 +1,6 @@
-﻿using Handelsrechner.view;
+﻿using Handelsrechner.View;
 
-namespace Handelsrechner.control
+namespace Handelsrechner.Control
 {
     internal class MainControl : BasisControl
     {
@@ -10,7 +10,7 @@ namespace Handelsrechner.control
                                                                                 "Differenzkalulation",
                                                                                 "Angebotsvergleich",
                                                                                 "Beenden" };
-        public override void ausfuehren(string auswahl = "Optionen")
+        public override void Ausfuehren(string auswahl = "Optionen")
         {
             Ausgabe ausgabe = new Ausgabe();
             KalkulationControl kalkulationControl = new KalkulationControl();
@@ -20,32 +20,32 @@ namespace Handelsrechner.control
                 switch (auswahl)
                 {
                     case "Optionen":
-                        ausgabe.titel(Titel);
+                        ausgabe.Titel(Titel);
                         auswahl = ausgabe.MenuAuswahl(MenuListe);
                         break;
 
                     // Handelskalkulation
                     case "1":
-                        kalkulationControl.ausfuehren("Handelskalkulation");
+                        kalkulationControl.Ausfuehren("Handelskalkulation");
                         auswahl = "Optionen";
                         break;
 
                     // Rückwärtskalkulation
                     case "2":
-                        kalkulationControl.ausfuehren("Rückwärtskalkulation");
+                        kalkulationControl.Ausfuehren("Rückwärtskalkulation");
                         auswahl = "Optionen";
                         break;
 
                     // Diffenenzkalkulation
                     case "3":
-                        kalkulationControl.ausfuehren("Differenzkalkulation");
+                        kalkulationControl.Ausfuehren("Differenzkalkulation");
                         auswahl = "Optionen";
                         break;
 
                     // Angebotsvergleich
                     case "4":
                         AngebotsvergleichControl angebotvergleichControl = new AngebotsvergleichControl();
-                        angebotvergleichControl.ausfuehren();
+                        angebotvergleichControl.Ausfuehren();
                         auswahl = "Optionen";
                         break;
 
@@ -54,7 +54,7 @@ namespace Handelsrechner.control
                         return;
 
                     default:
-                        ausgabe.fehlermeldung(AuswahlFehlermeldung);
+                        ausgabe.Fehlermeldung(AuswahlFehlermeldung);
                         auswahl = "Optionen";
                         break;
                 }

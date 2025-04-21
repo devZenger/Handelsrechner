@@ -1,6 +1,6 @@
-﻿using Handelsrechner.service;
+﻿using Handelsrechner.Service;
 
-namespace Handelsrechner.model
+namespace Handelsrechner.Model
 {
     public abstract class KalkulationBasis : Angebot
     {
@@ -23,8 +23,6 @@ namespace Handelsrechner.model
         public decimal UmsatzsteuerEUR { get; set; }
         public decimal ListenverkaufspreisBrutto { get; set; }
 
-
-        // Eingabebogen["HandlungskostenProzent"] = "Handlungskosten in Prozent";
         public KalkulationBasis()
         {
             Eingabebogen.Add("HandlungskostenProzent", "Handlungskosten in Prozent");
@@ -37,7 +35,6 @@ namespace Handelsrechner.model
         }
 
         public abstract void BerechneKalkulation();
-
         protected void BerechneHandlungskostenEUR()
         {
             if (HandlungskostenProzent > 0)
@@ -50,6 +47,7 @@ namespace Handelsrechner.model
                 HandlungskostenEUR = 0;
             }
         }
+
         protected void BerechneSelbstkosten()
         {
             if (Bezugspreis > 0)
@@ -71,15 +69,15 @@ namespace Handelsrechner.model
                 GewinnzuschlagEUR = 0;
             }
         }
+
         protected void BerechneBarverkaufspreis()
         {
             if (Selbstkosten > 0 && GewinnzuschlagProzent > 0)
                 Barverkaufspreis = Selbstkosten + GewinnzuschlagEUR;
             else
                 Barverkaufspreis = Zielverkaufspreis - KundenskontoEUR - VertreterprovisionEUR;
-
-            Console.WriteLine($"Barverkaufspreis: {Barverkaufspreis.ToString()}");
         }
+
         protected void BerechneKundenskontoEUR()
         {
             if (KundenskontoProzent > 0)
@@ -92,6 +90,7 @@ namespace Handelsrechner.model
                 KundenskontoEUR = 0;
             }
         }
+
         protected void BerechneVertreterprovisionEUR()
         {
             if (VertreterprovisionProzent > 0)
@@ -104,17 +103,15 @@ namespace Handelsrechner.model
                 VertreterprovisionEUR = 0;
             }
         }
+
         protected void BerechneZielverkaufspreis()
         {
-            Console.WriteLine($"Barverkaufspreis {Barverkaufspreis.ToString()}");
-
             if (Barverkaufspreis > 0)
                 Zielverkaufspreis = Barverkaufspreis / (100 - KundenskontoProzent - VertreterprovisionProzent) * 100;
             else
                 Zielverkaufspreis = Listenverkaufspreis / 100 * (100 - KundenrabattProzent);
-
-            Console.WriteLine($"Zielverkaufspreis {Zielverkaufspreis.ToString()}");
         }
+
         protected void BerechneKundenrabattEUR()
         {
             if (KundenrabattProzent > 0)
@@ -127,15 +124,15 @@ namespace Handelsrechner.model
                 KundenrabattEUR = 0;
             }
         }
+
         protected void BerechneListenverkaufspreis()
         {
             if (Zielverkaufspreis > 0)
                 Listenverkaufspreis = Zielverkaufspreis / (100 - KundenrabattProzent) * 100;
             else
                 Listenverkaufspreis = ListenverkaufspreisBrutto / (100 + UmsatzsteuerProzent) * 100;
-
-            Console.WriteLine($"Listenverkaufspreis {Listenverkaufspreis.ToString()}");
         }
+
         protected void BerechneUmsatzsteuerEUR()
         {
             if (UmsatzsteuerProzent > 0)
@@ -148,6 +145,7 @@ namespace Handelsrechner.model
                 UmsatzsteuerEUR = 0;
             }
         }
+
         protected void BerechneListenverkaufspreisBrutto()
         {
             ListenverkaufspreisBrutto = Listenverkaufspreis + UmsatzsteuerEUR;

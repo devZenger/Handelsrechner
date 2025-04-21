@@ -1,6 +1,6 @@
-﻿using Handelsrechner.model;
+﻿using Handelsrechner.Model;
 
-namespace Handelsrechner.service
+namespace Handelsrechner.Service
 {
     internal class ErzeugeTabelle
     {

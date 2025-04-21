@@ -1,4 +1,4 @@
-﻿using Handelsrechner.model;
+﻿using Handelsrechner.Model;
 
 namespace HandelsrechnerTest
 {

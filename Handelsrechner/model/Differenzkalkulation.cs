@@ -1,12 +1,10 @@
 ﻿using System;
 
-namespace Handelsrechner.model
+namespace Handelsrechner.Model
 {
     public class Differenzkalkulation : Handelskalkulation
     {
-
         protected override string Titel { get; } = "Differenzkalkulation";
-
         public Differenzkalkulation()
         {
             Eingabebogen.Add("ListenverkaufspreisBrutto", "Listenverkaufspreis Brutto");

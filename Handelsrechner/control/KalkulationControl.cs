@@ -1,14 +1,14 @@
-﻿using Handelsrechner.model;
-using Handelsrechner.service;
-using Handelsrechner.view;
+﻿using Handelsrechner.Model;
+using Handelsrechner.Service;
+using Handelsrechner.View;
 
-namespace Handelsrechner.control
+namespace Handelsrechner.Control
 {
     internal class KalkulationControl : BasisControl
     {
-        protected override string Titel { get; set; }
+        protected override string Titel { get; set; } = string.Empty;
         protected override List<string> MenuListe { get; } = new List<string> { "weitere Kalkulation durchführen", "zurück zum Hauptmenü" };
-        public override void ausfuehren(string auswahl)
+        public override void Ausfuehren(string auswahl)
         {
             Ausgabe ausgabe = new Ausgabe();
             string auswahlMenu = "1";
@@ -18,7 +18,7 @@ namespace Handelsrechner.control
                 switch (auswahlMenu)
                 {
                     case "1":
-                        kalkulation(auswahl);
+                        Kalkulation(auswahl);
                         auswahlMenu = "Optionen";
                         break;
 
@@ -30,19 +30,19 @@ namespace Handelsrechner.control
                         return;
 
                     default:
-                        ausgabe.fehlermeldung(AuswahlFehlermeldung);
+                        ausgabe.Fehlermeldung(AuswahlFehlermeldung);
                         break;
                 }
             }
         }
-        public void kalkulation(string auswahl)
+        protected void Kalkulation(string auswahl)
         {
             Eigenschaften eigenschaften = new Eigenschaften();
             ErzeugeTabelle erzeugeTabelle = new ErzeugeTabelle();
 
             Ausgabe ausgabe = new Ausgabe();
             Titel = auswahl;
-            ausgabe.titel(Titel);
+            ausgabe.Titel(Titel);
 
             KalkulationBasis? kalkulation = null;
 
@@ -61,7 +61,7 @@ namespace Handelsrechner.control
                     break;
 
                 default:
-                    ausgabe.fehlermeldung(AuswahlFehlermeldung);
+                    ausgabe.Fehlermeldung(AuswahlFehlermeldung);
                     break;
             }
 
@@ -72,12 +72,12 @@ namespace Handelsrechner.control
                     bool richtig = false;
                     while (richtig == false)
                     {
-                        string? eingabeString = ausgabe.frage(eingabe.Value);
+                        string? eingabeString = ausgabe.Frage(eingabe.Value);
 
                         richtig = eigenschaften.VersuchSetzen(kalkulation, eingabe.Key, eingabeString);
                         if (richtig == false)
                         {
-                            ausgabe.fehlermeldung(Fehlermeldung);
+                            ausgabe.Fehlermeldung(Fehlermeldung);
                         }
                     }
                 }
@@ -87,10 +87,10 @@ namespace Handelsrechner.control
                 var ausgabebogen = kalkulation.ErstelleAusgabebogen();
 
                 List<string> tabelle = erzeugeTabelle.erstelleKalkulation(ausgabebogen);
-                ausgabe.zeigeTabelle(tabelle);
+                ausgabe.ZeigeTabelle(tabelle);
             }
             else
-                ausgabe.fehlermeldung("Kalkulation konnte nicht berechnet werden");
+                ausgabe.Fehlermeldung("Kalkulation konnte nicht berechnet werden");
         }
 
     }

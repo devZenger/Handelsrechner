@@ -1,4 +1,4 @@
-﻿namespace Handelsrechner.model
+﻿namespace Handelsrechner.Model
 {
     public class Handelskalkulation : KalkulationBasis
     {
@@ -14,12 +14,10 @@
             BerechneGewinnzuschlagEUR();
             BerechneBarverkaufspreis();
 
-
             BerechneZielverkaufspreis();
 
             BerechneKundenskontoEUR();
             BerechneVertreterprovisionEUR();
-
 
             BerechneListenverkaufspreis();
 

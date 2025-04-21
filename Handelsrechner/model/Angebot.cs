@@ -1,4 +1,4 @@
-﻿namespace Handelsrechner.model
+﻿namespace Handelsrechner.Model
 {
     public class Angebot
     {
@@ -57,10 +57,12 @@
                 LieferrabattEUR = 0;
             }
         }
+
         protected virtual void BerechneZieleinkaufspreis()
         {
             Zieleinkaufspreis = Listeneinkaufspreis - LieferrabattEUR;
         }
+
         protected void BerechneLieferskontoEUR()
         {
             if (LieferrabattProzent > 0)
@@ -73,10 +75,12 @@
                 LieferskontoEUR = 0;
             }
         }
+
         protected virtual void BerechneBareinkaufspreis()
         {
             Bareinkaufspreis = Zieleinkaufspreis - LieferskontoEUR;
         }
+
         protected virtual void BerechneBezugspreis()
         {
             Bezugspreis = Bareinkaufspreis + Bezugskosten;

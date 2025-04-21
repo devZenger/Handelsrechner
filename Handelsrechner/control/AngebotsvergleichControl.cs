@@ -1,41 +1,45 @@
-﻿using Handelsrechner.model;
-using Handelsrechner.service;
-using Handelsrechner.view;
+﻿using Handelsrechner.Model;
+using Handelsrechner.Service;
+using Handelsrechner.View;
 
-namespace Handelsrechner.control
+namespace Handelsrechner.Control
 {
     internal class AngebotsvergleichControl : BasisControl
     {
-        protected override string Titel { get; set; } = "Angebotvergleich";
-        protected override List<string> MenuListe { get; } = new List<string> { "Angebot hinzufügen", "Angebote berechnen", "Beenden" };
-        public override void ausfuehren(string auswahl = "1")
+        protected override string Titel { get; set; } = "Angebotsvergleich";
+        protected string Info { get; } = "Angaben ohne Währungszeichen eingeben";
+        protected override List<string> MenuListe { get; } = new List<string> { "Angebot hinzufügen", "Angebot berechnen", "zurück zum Hauptmenü" };
+        protected List<string> MenuListeMehrere { get; } = new List<string> { "Angebot hinzufügen", "Angebote berechnen und vergleichen", "zurück zum Hauptmenü" };
+        public override void Ausfuehren(string auswahl = "1")
         {
             List<Angebot> angebotsliste = new List<Angebot>();
             Eigenschaften eigenschaften = new Eigenschaften();
 
             Ausgabe ausgabe = new Ausgabe();
 
-            ausgabe.titel(Titel);
+            ausgabe.Titel(Titel);
 
             while (true)
             {
                 switch (auswahl)
                 {
-                    case "1":
+                    case "1": // Angebot eingeben
                         angebotsliste.Add(new Angebot());
                         int i = angebotsliste.Count - 1;
+
+                        ausgabe.Info(Info);
 
                         foreach (var eingabe in angebotsliste[i].Eingabebogen)
                         {
                             bool richtig = false;
                             while (richtig == false)
                             {
-                                string? eingabeString = ausgabe.frage(eingabe.Value);
+                                string? eingabeString = ausgabe.Frage(eingabe.Value);
 
                                 richtig = eigenschaften.VersuchSetzen(angebotsliste[i], eingabe.Key, eingabeString);
                                 if (richtig == false)
                                 {
-                                    ausgabe.fehlermeldung(Fehlermeldung);
+                                    ausgabe.Fehlermeldung(Fehlermeldung);
                                 }
                             }
                         }
@@ -43,7 +47,10 @@ namespace Handelsrechner.control
                         break;
 
                     case "Optionen":
-                        auswahl = ausgabe.MenuAuswahl(MenuListe);
+                        if (angebotsliste.Count == 1)
+                            auswahl = ausgabe.MenuAuswahl(MenuListe);
+                        else
+                            auswahl = ausgabe.MenuAuswahl(MenuListeMehrere);
                         break;
 
                     case "2": //Angebote berechnen
@@ -51,9 +58,10 @@ namespace Handelsrechner.control
                         {
                             angebotsliste[j].BerechneAngebot();
                         }
+                        ausgabe.Titel(Titel);
                         ErzeugeTabelle erzeugeTabelle = new ErzeugeTabelle();
                         var tabelle = erzeugeTabelle.erstelleVergleich(angebotsliste);
-                        ausgabe.zeigeTabelle(tabelle);
+                        ausgabe.ZeigeTabelle(tabelle);
 
                         int angebot = 0;
                         if (angebotsliste.Count > 1)
@@ -65,23 +73,20 @@ namespace Handelsrechner.control
                                     preis = angebotsliste[j].Bezugspreis;
                                 angebot = j;
                             }
-                            ausgabe.info($"Der günstigste Preis ist {preis} vom Angebot: {angebotsliste[angebot].Angebotsname}");
+                            ausgabe.Info($"Der günstigste Preis ist {preis} Euro vom {angebotsliste[angebot].Angebotsname}");
                         }
                         auswahl = "Optionen";
                         break;
 
                     case "3":
-                        Console.WriteLine("beenden");
-                        break;
-
+                        return;
+                 
                     default:
-                        ausgabe.fehlermeldung(Fehlermeldung);
+                        ausgabe.Fehlermeldung(Fehlermeldung);
                         auswahl = "Optionen";
                         break;
-
                 }
             }
-
         }
     }
 }

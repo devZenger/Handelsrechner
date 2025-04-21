@@ -1,4 +1,4 @@
-﻿namespace Handelsrechner.service
+﻿namespace Handelsrechner.Service
 {
     internal class Eigenschaften
     {

@@ -1,4 +1,4 @@
-﻿namespace Handelsrechner.model
+﻿namespace Handelsrechner.Model
 {
     public class Rueckwaertskalkulation : KalkulationBasis
     {
@@ -7,9 +7,6 @@
         {
             Eingabebogen.Remove("Listeneinkaufspreis");
             Eingabebogen.Add("ListenverkaufspreisBrutto", "Brutto-Listenverkaufspreis");
-            //Eingabebogen.Add("UmsatzsteuerProzent", "Umsatzsteuer in Prozent");
-            //Eingabebogen.Add("KundenrabattProzent", "Kundenrabatt in Prozent");
-
         }
 
         public override void BerechneKalkulation()
@@ -38,24 +35,26 @@
 
             BerechneListeneinkaufspreis();
             BerechneLieferrabattEUR();
-
         }
+
         protected override void BerechneBezugspreis()
         {
             Bezugspreis = Selbstkosten / (100 + HandlungskostenProzent) * 100;
         }
+
         protected override void BerechneBareinkaufspreis()
         {
             Bareinkaufspreis = Bezugspreis - Bezugskosten;
         }
+
         protected override void BerechneZieleinkaufspreis()
         {
             Zieleinkaufspreis = Bareinkaufspreis / (100 - LieferskontoProzent) * 100;
         }
+
         protected void BerechneListeneinkaufspreis()
         {
             Listeneinkaufspreis = Zieleinkaufspreis / (100 - LieferrabattProzent) * 100;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using Handelsrechner.control;
+﻿using Handelsrechner.Control;
 
 namespace Handelsrechner
 {
@@ -7,7 +7,7 @@ namespace Handelsrechner
         static void Main(string[] args)
         {
             MainControl mainControl = new MainControl();
-            mainControl.ausfuehren();
+            mainControl.Ausfuehren();
 
             Environment.Exit(0);
         }

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace Handelsrechner.control
+namespace Handelsrechner.Control
 {
     abstract class BasisControl
     {
@@ -10,6 +10,6 @@ namespace Handelsrechner.control
         protected string Fehlermeldung = "Eingabe war nicht korrekt, bitte erneut versuchen.";
 
         protected string AuswahlFehlermeldung = $"Fehler: auswahl konnte nicht zugeordnet werden.";
-        public abstract void ausfuehren(string auswahl);
+        public abstract void Ausfuehren(string auswahl);
     }
 }

@@ -1,32 +1,34 @@
-﻿namespace Handelsrechner.view
+﻿namespace Handelsrechner.View
 
 {
     internal class Ausgabe
     {
-        private string Linie = "\t---------------------------------------------------------";
+        private string Linie { get; } = "\t---------------------------------------------------------";
 
-        public void titel(string titel)
+        public void Titel(string titel)
         {
             Console.WriteLine(Linie);
             Console.WriteLine($"\t{titel}");
             Console.WriteLine(Linie);
         }
-        public void info(string text)
+        public void Info(string text)
         {
-            Console.WriteLine($"\t{text}");
-            Console.WriteLine(Linie);
+            Console.WriteLine($"\t{text}\n");
         }
 
-        public string frage(string text)
+        public string Frage(string text)
         {
             Console.Write($"\tBitte {text} eingeben: ");
             string? eingabe = Console.ReadLine();
+            if (eingabe == null)
+                eingabe = "";
             return eingabe;
         }
 
-        public void fehlermeldung(string text)
+        public void Fehlermeldung(string text)
         {
             Console.WriteLine($"\t{text}");
+            Console.WriteLine(Linie);
         }
 
         public string MenuAuswahl(List<string> auswahl)
@@ -40,9 +42,12 @@
             Console.WriteLine(Linie);
             Console.Write("\tBitte Zahl eingeben: ");
             string? eingabe = Console.ReadLine();
+            Console.WriteLine(Linie);
+            if (eingabe == null)
+                eingabe = "";
             return eingabe;
         }
-        public void zeigeTabelle(List<string> tabelle)
+        public void ZeigeTabelle(List<string> tabelle)
         {
             Console.WriteLine(Linie);
             for (int i = 0; i < tabelle.Count; i++)
