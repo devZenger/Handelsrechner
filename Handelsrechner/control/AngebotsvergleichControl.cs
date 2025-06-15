@@ -64,16 +64,27 @@ namespace Handelsrechner.Control
                         ausgabe.ZeigeTabelle(tabelle);
 
                         int angebot = 0;
+                        bool gleich = false;
                         if (angebotsliste.Count > 1)
                         {
                             var preis = angebotsliste[0].Bezugspreis;
                             for (int j = 1; j < angebotsliste.Count; j++)
                             {
+                                if (preis == angebotsliste[j].Bezugspreis)
+                                    gleich = true;
+                                else if (preis > angebotsliste[j].Bezugspreis)
+                                    gleich = false;
+
                                 if (preis > angebotsliste[j].Bezugspreis)
+                                {
                                     preis = angebotsliste[j].Bezugspreis;
-                                angebot = j;
+                                    angebot = j;
+                                }  
                             }
-                            ausgabe.Info($"Der günstigste Preis ist {preis} Euro vom {angebotsliste[angebot].Angebotsname}");
+                            if (gleich)
+                                ausgabe.Info("Die Angebote sind gleich günstig.");
+                            else
+                                ausgabe.Info($"Angebot: {angebotsliste[angebot].Angebotsname} hat den günstigsten Preis mit {preis} Euro.");
                         }
                         auswahl = "Optionen";
                         break;
