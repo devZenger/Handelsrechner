@@ -1,4 +1,6 @@
 ﻿using Handelsrechner.View;
+using Microsoft.VisualBasic;
+using System.Security.AccessControl;
 
 namespace Handelsrechner.Control
 {
@@ -9,6 +11,7 @@ namespace Handelsrechner.Control
                                                                                 "Rückwärtskalkulation",
                                                                                 "Differenzkalulation",
                                                                                 "Angebotsvergleich",
+                                                                                "Informationen",
                                                                                 "Beenden" };
         public override void Ausfuehren(string auswahl = "Optionen")
         {
@@ -49,8 +52,16 @@ namespace Handelsrechner.Control
                         auswahl = "Optionen";
                         break;
 
-                    // Programm beenden
+                    // Informationen
                     case "5":
+                        ausgabe.Titel("Informationen");
+                        string infos = ("Programmiert von Christian Zenger.\n\tVersion 1.0 - Juni 2025.\n\tFeedback und Fragen unter:\n\tGitHub: https://github.com/devZenger/Handelsrechner");
+                        ausgabe.Info(infos);
+                        auswahl = ausgabe.MenuAuswahl(MenuListe);
+                        break;
+
+                    // Programm beenden
+                    case "6":
                         return;
 
                     default:
