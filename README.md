@@ -17,7 +17,7 @@ Darüber hinaus bot das Projekt die Möglichkeit, die verschiedenen Kalkulations
   - [Klassendiagramm](#funktionen)
   - [Projektstruktur](#projektstruktur)
 - [Screenshots](#screenshots)
-- [Installation](#installation)
+- [Installation und Quellcode](#installation)
 - [Lizenz](#lizenz)
 
 ## Verwendete Technologien
@@ -129,7 +129,7 @@ Handelsrechner/
 
 
 ## Installation und Quellcode
-Das Programm steht als ausführbare Datei zur Verfügung und kann unter Link heruntergeladen werden:
+Die aktuelle Version des Handelsrechners steht als .exe-Datei im Release-Bereich dieses Repositories zum [Download](https://github.com/devZenger/Handelsrechner/releases/tag/v1.0.0) bereit.  
 
 Nach dem Herunterladen kannst du das Programm einfach per Doppelklick auf die Datei **Handelsrechner.exe** starten.
 Alternative kannst du es über die Konsole ausführen. Wechsle dazu in das Verzeichnis, in dem sich die Datei befindet, und gib folgenden Befehl ein: 
