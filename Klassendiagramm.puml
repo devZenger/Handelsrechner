@@ -6,8 +6,8 @@ skinparam classFontStyle bold
 
 namespace Handelsrechner.Model {
     class Angebot {
-        + Angebotsname : string
-        + Listeneinkaufspreis : decimal
+        + Angebotsname: string
+        + Listeneinkaufspreis: decimal
         + LieferrabbattProzent : decimal
         + LieferrabattEUR : decimal
         + Zieleinkaufspreis : decimal
@@ -18,24 +18,24 @@ namespace Handelsrechner.Model {
         + Bezugspreis : decimal
         + Eingabebogen : Dictionary
         + Ausgabebogen : Dictionary
-        + BerechneAngebot() void
-        # BerechneLieferrabattEUR() void
-        # BerechneZieleinkaufspreis() void <<virtual>>
-        # BerechneLieferskontoEUR() void
-        # BerechneBareinkaufspreis() void <<virtual>>
-        # BerechneBezugspreis() void <<virtual>>
+        + BerechneAngebot(): void
+        # BerechneLieferrabattEUR(): void
+        # BerechneZieleinkaufspreis(): void <<virtual>>
+        # BerechneLieferskontoEUR(): void
+        # BerechneBareinkaufspreis(): void <<virtual>>
+        # BerechneBezugspreis(): void <<virtual>>
     }
 
     class Differenzkalkulation {
-        # Titel : string <<override>>
-        + Differenzkalkulation() void
-        + BerechneKalkulation() void <<override>>
-        # BerechneGewinn() void
+        # Titel: string <<override>>
+        + Differenzkalkulation(): void
+        + BerechneKalkulation(): void <<override>>
+        # BerechneGewinn(): void
     }
 
     class Handelskalkulation {
-        # Titel : string <<override>>
-        + BerechneKalkulation() void <<override>>
+        # Titel: string <<override>>
+        + BerechneKalkulation(): void <<override>>
     }
 
     abstract class KalkulationBasis {
@@ -68,10 +68,10 @@ namespace Handelsrechner.Model {
         # BerechneZielverkaufspreos() void
     }
     class Rueckwaertskalkulation {
-        # Titel : string <<override>>
+        # Titel: string <<override>>
         + BerechneKalkulation(): void <<override>>
         # BerechneBezugspreis(): void <<override>>
-        # BerechneBareinkaufspreis() : void <<override>>
+        # BerechneBareinkaufspreis(): void <<override>>
         # BerechneZieleinkaufspreis(): void <<override>>
         # BerechneListeneinkaufspreis(): void <<override>>
     }
