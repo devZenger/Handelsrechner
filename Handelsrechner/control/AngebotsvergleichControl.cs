@@ -79,12 +79,20 @@ namespace Handelsrechner.Control
                                 {
                                     preis = angebotsliste[j].Bezugspreis;
                                     angebot = j;
-                                }  
+                                }
                             }
                             if (gleich)
                                 ausgabe.Info("Die Angebote sind gleich günstig.");
                             else
-                                ausgabe.Info($"Angebot: {angebotsliste[angebot].Angebotsname} hat den günstigsten Preis mit {preis} Euro.");
+                            {
+                                string vergleichsform;
+
+                                if (angebotsliste.Count > 2)
+                                    vergleichsform = "günstigsten";
+                                else
+                                    vergleichsform = "günstigsteren";
+                                ausgabe.Info($"{angebotsliste[angebot].Angebotsname} hat den  {vergleichsform} Preis mit {preis} Euro.");
+                            }
                         }
                         auswahl = "Optionen";
                         break;
