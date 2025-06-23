@@ -92,6 +92,7 @@ Handelsrechner/
 │    └── (enthält Screenshots für die README-Datei)
 ├── Handelsrechner.sln
 ├── Klassendiagramm.puml
+├── LICENSE.txt
 └── README.md
 </pre>
 
@@ -146,6 +147,18 @@ git clone https://github.com/devZenger/Handelsrechner.git
 Dieses Projekt wurde ausschließlich zu **Lern- und Demonstrationszwecken** entwickelt.  
 Die Nutzung des Quellcodes ist für den privaten, nicht-kommerziellen Gebrauch gestattet   
 
-Eine Weitergabe, Veränderung oder kommerzielle Nutzung ist nur mit ausdrücklicher Genehmigung erlaubt.  
+Der Quellcode dieses Projekts darf **für private, nicht-kommerzielle Zwecke verwendet** werden.  
+Eine Weitergabe, Veränderung oder kommerzielle Nutzung ist **nur mit ausdrücklicher Genehmigung** des Autors gestattet.  
+Bitte beachte, dass dieses Projekt **nicht unter einer Open-Source-Lizenz** steht, auch wenn es auf Open-Source-Komponenten basiert.
 
 Bei Fragen oder Feedback freue ich mich über eine Nachricht.
+
+
+### Verwendete Drittanbieter-Technologien
+
+- **.NET 8.0 / C#** – [MIT License](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT)
+- **xUnit** – [Apache 2.0 License](https://github.com/xunit/xunit/blob/main/LICENSE)
+- **PlantUML** – [MIT License](https://plantuml.com/de/download#mit)
+
+Bitte beachte die jeweiligen Lizenzbedingungen bei Weiterverwendung.
+
