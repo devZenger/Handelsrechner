@@ -1,45 +1,58 @@
-# Projekt Handelsrechner
-Ein Konsolenprogramm zur Berechnung der handelsüblichen Kalkulationsarten:  
-**Handelskalkultaion**, **Rückwärtskalkulation** und **Differenzkalkulation** sowie ein **Angebotsvergleich**.  
-Das Programm wurde in **C# (.NET 8.0)** nach dem **MVC Pattern** strukturiert. Das Projekt diente dazu, bereits erlernte Konzepte praktisch anzuwenden, insbesondere den Einsatz von  **Unit-Tests** mit **xUnit**. Dabei stand neben der Implementierung auch die systematishe Absicherung der Krernlogik im Focus.  
-Darüber hinaus bot das Projekt die Möglichkeit, die verschiedenen Kalkulationsarten im Handel praxsisnah zu wiederholen und anzuwenden.
-
-<div style="text-align: center;">
-<b>Handelsrechner: Startmenü</b> <br>
-<img src="images/Screenshot_Startmenu.png" alt="Startmenü" title="Handelsrechner" style="width:50%; height:auto;">
-</div>
+# Handelsrechner – Kalkulationstool mit C# & xUnit
 
 ## Inhaltsverzeichnis:
 - [Verwendete Technologien](#verwendete-technologien)
-- [Projektvorstellung](#projektvorstellung)
-- [Programmübersicht](#programmübersicht)
+- [Kurzvorstellung](#kurzvorstellung)
+- [Übersicht](#übersicht)
   - [Funktionen](#funktionen)
   - [Klassendiagramm](#funktionen)
   - [Projektstruktur](#projektstruktur)
-- [Screenshots](#screenshots)
+  - [Screenshots](#screenshots)
+- [Projektvorstellung](#projektvorstellung)
 - [Installation und Quellcode](#installation)
 - [Lizenz](#lizenz)
 
+---
+
 ## Verwendete Technologien
-- C# mit .NET 8.0
-- xUnit für Unit-Tests
-- PlantUML zur Erstellung des Klassendiagramms
+- **.NET 8.0 / C#**
+- **xUnit** (Unit Testing)
+- **PlantUML** (Klassendiagramm-Erstellung)
 
-## Projektvorstellung:
-Dieses Projekt entstand mit dem Ziel, meine Kenntnisse in **C#** und **Softwarearchitektur nach dem MVC-Prinzip** praxisnah zu vertiefen. Die Idee für einen **Handelsrechner** stammt von mir – inspiriert durch Kalkulationsthemen, die im Unterricht behandelt wurden. Das klar umrissene Szenario ist zeitlich gut überschaubar und eignet sich hervorragend, um Programmierprinzipen strukturiert anzuwenden.
+---
 
-Bei der Umsetzung konnten verschiedene Konzepte der objektorientierten Programmierung gezielt eingesetzt werden – darunter **Klassen, Vererbung, Polymorphie** sowie **Trennung von Zuständigkeiten**. Zur zentralen Bereitstellung gemeinsamer Logik kamen **abstrakte Basisklassen** zum Einsatz. Die Kalkulationslogik wurde so gestaltet, dass sie flexibel erweiterbar bleibt; spezifische Berechnungen konnten bei Bedarf durch Überschreiben (`override`) angepasst werden. Zudem wurde auf eine saubere **Kapselung** geachtet: Die eigentliche Berechnungsfunktionenen sind als **protected** deklariert und werden kontrolliert über öffentliche Methoden ausgeführt.
+## Kurzvorstellung
+Ein Konsolenprogramm zur Berechnung handelsüblicher Kalkulationsarten:
 
-Zur Erhöhung der Robustheit wurde eine grundlegende **Fehlerbehandlung** integriert, insbesondere beim **dynamischen Setzen und Auslesen** von Objekteigenschaften über **Reflection**.
-Ungültige Benutzereingaben – etwa falsche Eigenschaftsnamen oder inkompatible Datentypen – werden dabei abgefangen, ohne das Programm zu unterbrechen. Die Methoden geben bei Fehlern gezielt Rückmeldungen, sodass eine kontrollierte Weiterverarbeitung möglich ist.
+- **Handelskalkulation**
+- **Rückwärtskalkulation**
+- **Differenzkalkulation**
+- **Angebotsvergleich**
 
-Wiederkehrende Logik wurde in **gemeinsamen Service-Klassen** gekapselt, womit dem **DRY-Prinzip** („Don't Repeat Yourself“) gefolgt wurde.  
-Durch die Verwendung des **MVC-Patterns** ist die Anwendung klar in **Model, View und Controller** unterteilt, was die **Wartbarkeit und Testbarkeit** verbessert. 
+ Die entwickelten Unit-Tests prüfen sowohl Einzelmethoden als auch vollständige Berechnungspfade und halfen dabei, die Robustheit des Programms deutlich zu erhöhen. Als erste praktische Anwendung von Unit-Testing konnte ich dabei wertvolle Erfahrung im Aufbau, der Strukturierung und der Fehleranalyse automatisierter Tests sammeln.
 
-Während des Projekts konnte ich praktische Einblicke in die Verwendung von **Reflection in C#** gewinnen – ein Konzept, das ich zuvor bereits in Python kennengelernt hatte. Es war spannend, dieses Wissen nun auch in einem C#-Projekt anzuwenden.  
-Noch interessanter war für mich die Umsetzung von **Unit-Tests** mit **xUnit**. Zwar hatte ich die Grundlagen bereits in einem Online-Kurs kennengelernt, jedoch bisher nie in einem eigenen Projekt eingesetzt. Da dies meine ersten eigenständig entwickelten Tests waren, musste ich nicht nur mein Programm, sondern auch meine Tests selbst kritisch hinterfragen. Ich bin jedoch zuversichtlich, dass ich durch den Einsatz von **automatisierten Tests** künftig Zeit sparen und die Qualität meiner Anwendung weiter verbessern kann. Die Unit-Tests decken sowohl einzelne Funktionen der Modellklassen als auch das Gesamtergebnis ab.
+Der Schwerpunkt lag bei diesen Projekt auf den Einsatz von **xUnit** zur systematischen Absicherung der Kalkulationen. So konnte ich das schon erlernte Konzept an einen eigenen Projekt umzusetzen und Erfahrung im Umgang von automatisierten Test erlangen.
 
-## Programmübersicht
+Weitere Themen die Umgesetz wurden:
+- saubere **Trennung von Verantwortlichkeiten (MVC)**
+- Einsatz von **abstrakten Basisklassen** zur Wiederverwendung von Logik
+- Schutz kritischer Logik durch **`protected`-Zugriffe**
+- Nutzung von **Reflection**, um dynamisch auf Eigenschaften zuzugreifen**
+- Integration robuster **Fehlerbehandlung** für Benutzereingaben
+
+Bei der Umsetzung orientierte ich mich an meiner früheren Client-Anwendung im MVC-Stil in Python (Projekt FoxFinance). Diese Erfahrung half mir, die neue Anwendung in C# schneller zu entwickeln, da ich vergleichbare Strukturen übernehmen konnte.
+Neu für mich war der Einsatz von Reflection in C#, was mir spannende Einblicke in die dynamische Programmierung ermöglichte.
+Das Projekt zeigte mir deutlich, welche Vorteile automatisierte Tests bieten – insbesondere im Hinblick auf Wartbarkeit und Fehlervermeidung. Gleichzeitig wurde mir bewusst, dass das Schreiben solcher Tests mit Aufwand verbunden ist und ihr Nutzen stark von der jeweiligen Situation abhängt.
+
+
+<div style="text-align: center;">
+<b>Handelsrechner: Startmenü</b> <br>
+<img src="images/Screenshot_Startmenu.png" alt="Startmenü" title="Handelsrechner" style="width:60%; height:auto;">
+</div>
+
+---
+
+## Übersicht
 ### Funktionen
 - Auswahl zwischen folgenden Berechnungsarten:
   - Handelskalkulation
@@ -49,6 +62,8 @@ Noch interessanter war für mich die Umsetzung von **Unit-Tests** mit **xUnit**.
 - Benutzerführung über eine einfache Konsolenobergläche
 - Eingabe der benötigten Werte
 - Automatische Berechnung und Ausgabe des Ergebnisses  
+
+---
 
 ### UML-Klassendiagramm
 Das Klassendiagramm ist zusätzlich als `.puml`-Datei im Projektverzeichnis enthalten.
@@ -60,6 +75,8 @@ Das Klassendiagramm ist zusätzlich als `.puml`-Datei im Projektverzeichnis enth
     </p>
   </div>
 </div>
+
+---
 
 ### Projektstruktur
 <pre style="font-size:12px; font-family:Consolas;">
@@ -96,7 +113,9 @@ Handelsrechner/
 └── README.md
 </pre>
 
-## Screenshots
+---
+
+### Screenshots
 
 <div style="width: 60%; margin: 0 auto; text-align: left;">
   <h3>Angebotsvergleich: Eingabe von Angebot A und B:</h3>
@@ -128,9 +147,34 @@ Handelsrechner/
   </div>
 </div>
 
+---
+
+## Projektvorstellung
+
+Dieses Projekt entstand mit dem Ziel, meine Kenntnisse in **C#** weiter auszubauen und das bereits bekannte **MVC-Prinzip** in einem neuen technologischen Umfeld praktisch anzuwenden. Die Idee für den **Handelsrechner** basiert auf Unterrichtsinhalten zur Kalkulation und bot ein klar umrissenes Szenario, das sich gut für die strukturierte Umsetzung objektorientierter Prinzipien eignete.
+
+Im Zentrum stand die Entwicklung eines **Konsolenprogramms**, das verschiedene Kalkulationsarten unterstützt – darunter **Handelskalkulation**, **Rückwärtskalkulation**, **Differenzkalkulation** und **Angebotsvergleiche**. Die Anwendung wurde bewusst modular aufgebaut, um Wiederverwendbarkeit zu ermöglichen – etwa durch eine zentrale Ausgabeklasse und vererbte Klassenstrukturen.
+
+Zur Umsetzung kamen zentrale Konzepte der objektorientierten Programmierung zum Einsatz:
+- **Abstrakte Basisklassen** zur Bündelung gemeinsamer Logik
+- **Vererbung und Polymorphie** zur Spezialisierung einzelner Kalkulationen
+- **Kapselung** durch `protected`-Zugriffe auf sensible Berechnungslogik
+- **Trennung von Zuständigkeiten** gemäß dem MVC-Muster
+
+Ergänzend dazu ermöglichte der Einsatz von **Reflection** eine flexible und dynamische Verarbeitung von Benutzereingaben – ein Konzept, das ich zuvor bereits in Python kennengelernt hatte. So konnten Eigenschaften zur Laufzeit gesetzt und ausgelesen werden, ohne die Struktur der Klassen fest zu verdrahten. Fehlerhafte Eingaben – etwa ungültige Eigenschaftsnamen oder inkompatible Datentypen – werden dabei abgefangen und gezielt behandelt, ohne das Programm zu unterbrechen.
+
+Wiederkehrende Funktionalitäten wurden in **Service-Klassen** ausgelagert, um dem **DRY-Prinzip** („Don't Repeat Yourself“) zu folgen und die Wartbarkeit zu erhöhen.
+
+Ein zentrales Lernziel war der **Einsatz von Unit-Tests mit xUnit**. Zwar hatte ich bereits erste Erfahrungen mit Testkonzepten, doch in diesem Projekt konnte ich sie erstmals systematisch auf ein eigenes Vorhaben anwenden. Die Tests decken sowohl einzelne Methoden als auch komplette Berechnungspfade ab.
+
+Einen echten Vorteil konnte ich daraus noch nicht vollständig ziehen, da ich bei fehlschlagenden Tests nicht nur meine Funktionen, sondern auch die Testsyntax selbst hinterfragen musste. Dennoch war diese Auseinandersetzung sehr lehrreich und hat mein Verständnis für automatisierte Tests deutlich vertieft.
+
+Insgesamt hat mir das Projekt nicht nur die Stärken und Herausforderungen automatisierter Tests vor Augen geführt, sondern auch geholfen, meinen Programmierhorizont zu erweitern und mein Wissen über Kalkulationen im Handel zu festigen.
+
+---
 
 ## Installation und Quellcode
-Die aktuelle Version des Handelsrechners steht als .exe-Datei im Release-Bereich dieses Repositories zum [Download](https://github.com/devZenger/Handelsrechner/releases/tag/v1.0.0) bereit.  
+Die aktuelle Version des Handelsrechners steht als `.exe`-Datei im Release-Bereich dieses Repositories zum [Download](https://github.com/devZenger/Handelsrechner/releases/tag/v1.0.0) bereit.  
 
 Nach dem Herunterladen kannst du das Programm einfach per Doppelklick auf die Datei **Handelsrechner.exe** starten.
 Alternative kannst du es über die Konsole ausführen. Wechsle dazu in das Verzeichnis, in dem sich die Datei befindet, und gib folgenden Befehl ein: 
@@ -143,7 +187,13 @@ Wär interesse am Quellcode hat, kann das Repository mit folgenden Befehl klonen
 git clone https://github.com/devZenger/Handelsrechner.git
 ```
 
+---
+
 ## Lizenz
+
+Copyright (c) 2025 Christian Zenger
+GitHub: https://github.com/devZenger/Handelsrechner
+
 Dieses Projekt wurde ausschließlich zu **Lern- und Demonstrationszwecken** entwickelt.  
 Die Nutzung des Quellcodes ist für den privaten, nicht-kommerziellen Gebrauch gestattet   
 
@@ -161,4 +211,3 @@ Bei Fragen oder Feedback freue ich mich über eine Nachricht.
 - **PlantUML** – [MIT License](https://plantuml.com/de/download#mit)
 
 Bitte beachte die jeweiligen Lizenzbedingungen bei Weiterverwendung.
-
